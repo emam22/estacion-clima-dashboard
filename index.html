@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estación — Dashboard del clima</title>
+  <meta name="description" content="Dashboard de clima en tiempo real por ciudad, con pronóstico horario y de 5 días.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">◎</span>
+        <span class="brand-name">Estación</span>
+      </div>
+
+      <form class="search-form" id="searchForm" role="search">
+        <input
+          type="text"
+          id="citySearch"
+          placeholder="Buscar ciudad… (ej: Buenos Aires)"
+          autocomplete="off"
+          aria-label="Buscar ciudad"
+        >
+        <button type="submit" class="btn-icon" aria-label="Buscar">→</button>
+      </form>
+
+      <button class="btn-geo" id="geoBtn" title="Usar mi ubicación">📍 Mi ubicación</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div id="statusMsg" class="status-msg" aria-live="polite"></div>
+
+    <!-- Panel principal: dial + datos actuales -->
+    <section class="current-panel" id="currentPanel" hidden>
+      <div class="dial-wrap">
+        <svg id="tempDial" class="temp-dial" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="88" class="dial-track"></circle>
+          <circle cx="100" cy="100" r="88" class="dial-progress" id="dialProgress"></circle>
+        </svg>
+        <div class="dial-center">
+          <span class="dial-temp" id="currentTemp">--°</span>
+          <span class="dial-desc" id="currentDesc">—</span>
+        </div>
+      </div>
+
+      <div class="current-details">
+        <h1 class="city-name" id="cityName">—</h1>
+        <p class="city-meta" id="cityMeta">—</p>
+
+        <dl class="metrics">
+          <div class="metric">
+            <dt>Sensación</dt>
+            <dd id="feelsLike">--°</dd>
+          </div>
+          <div class="metric">
+            <dt>Humedad</dt>
+            <dd id="humidity">--%</dd>
+          </div>
+          <div class="metric">
+            <dt>Viento</dt>
+            <dd id="wind">-- km/h</dd>
+          </div>
+          <div class="metric">
+            <dt>Máx. / Mín.</dt>
+            <dd id="maxMin">--° / --°</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Pronóstico por hora -->
+    <section class="hourly-section" id="hourlySection" hidden>
+      <h2 class="panel-title">-- próximas horas</h2>
+      <div class="hourly-scroll" id="hourlyList"></div>
+    </section>
+
+    <!-- Pronóstico 5 días -->
+    <section class="daily-section" id="dailySection" hidden>
+      <h2 class="panel-title">-- próximos 5 días</h2>
+      <div class="daily-grid" id="dailyList"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Estación · creado por Emanuel Mendez 🇦🇷 · datos vía Open-Meteo (open-meteo.com)</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
